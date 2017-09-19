@@ -256,9 +256,9 @@ int handle_challenge (struct tunnel *t, struct challenge *chal)
 
     if (!get_secret (us, them, chal->secret, sizeof (chal->secret)))
     {
-        l2tp_log (LOG_DEBUG, "%s: no secret found for us='%s' and them='%s'\n",
+        l2tp_log (LOG_WARNING, "%s: no secret found for us='%s' and them='%s', using empty secret\n",
              __FUNCTION__, us, them);
-        return -1;
+        chal->secret[0] = 0;
     }
 
 #if DEBUG_AUTH
